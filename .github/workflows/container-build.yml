@@ -36,5 +36,6 @@ jobs:
       - name: Attest container image
         uses: actions/attest-build-provenance@v1
         with:
+          subject-name: ghcr.io/${{ github.repository_owner }}/simple-webapp:latest
           subject-digest: "sha256:${{ steps.image_digest.outputs.digest }}"
 
