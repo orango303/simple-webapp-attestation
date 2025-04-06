@@ -31,11 +31,11 @@ jobs:
         run: |
           IMAGE=ghcr.io/${{ github.repository_owner }}/simple-webapp:latest
           DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE | cut -d@ -f2)
-          echo "digest=$DIGEST" >> $GITHUB_OUTPUT
+          echo "digest=sha256:$DIGEST" >> $GITHUB_OUTPUT
 
       - name: Attest container image
         uses: actions/attest-build-provenance@v1
         with:
           subject-name: ghcr.io/${{ github.repository_owner }}/simple-webapp:latest
-          subject-digest: "sha256:${{ steps.image_digest.outputs.digest }}"
+          subject-digest: "${{ steps.image_digest.outputs.digest }}"
 
